@@ -2,9 +2,13 @@ const Groq = require("groq-sdk");
 const express = require('express')
 const cors = require('cors');
 const dotenv = require('dotenv');
+const fs = require('fs');
+const path = require('path');
 
 dotenv.config();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+const full=path.join(__dirname, './prompt/full.txt');
 
 const app = express();
 const port = 3000;
@@ -31,13 +35,14 @@ async function main(message) {
   }
 
 async function getGroqChatCompletion(message) {
+    const fulldat= fs.readFileSync(full, 'utf8');
     return groq.chat.completions.create({
         messages: [
         {
             role: "user",
-            content: `${message}`,
+            content: `${fulldat+message}]`,
         },
         ],
-        model: "llama3-70b-8192",
+        model: "llama-3.1-70b-versatile",
     });
 }

@@ -35,3 +35,5 @@ temp/
 
 # VSCode settings
 .vscode/
+
+test.js
