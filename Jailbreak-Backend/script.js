@@ -2,18 +2,17 @@ const Groq = require("groq-sdk");
 const express = require('express')
 const cors = require('cors');
 const dotenv = require('dotenv');
+
 dotenv.config();
-
-const app = express();
-const port = 3000
-
-app.use(cors());
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
+const app = express();
+const port = 3000;
+
+app.use(cors());
 app.use(express.json());
 
 app.post('/', (req, res) => {
-    console.log(req.body);
     const message=(req.body.message);
     main(message).then((response) => {
         res.send(response);
@@ -39,6 +38,6 @@ async function getGroqChatCompletion(message) {
             content: `${message}`,
         },
         ],
-        model: "llama3-8b-8192",
+        model: "llama3-70b-8192",
     });
 }
