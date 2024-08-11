@@ -5,6 +5,7 @@ const TextBoxWithButton = () => {
   const [inputText, setInputText] = useState('');
   const [resultText, setResultText] = useState('');
   const [backendURL, setBackendURL] = useState('http://localhost:3001/');
+  const [loading, setLoading] = useState("");
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
@@ -16,9 +17,11 @@ const TextBoxWithButton = () => {
 
   const handleSubmit = async () => {
     try {
+      setLoading("Loading...");
       const response = await axios.post(backendURL, { message: inputText });
       console.log(response);
       setResultText(response.data);
+      setLoading("");
     } catch (error) {
       console.error('Error posting data:', error);
     }
@@ -43,6 +46,7 @@ const TextBoxWithButton = () => {
       />
       <br />
       <button onClick={handleSubmit}>Submit</button>
+      <p>{loading}</p>
       <br />
       <textarea 
         value={resultText} 
