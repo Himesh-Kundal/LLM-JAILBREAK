@@ -24,11 +24,15 @@ app.post('/', (req, res) => {
     });
 })
 
+app.use((err, req, res, next) => {
+  console.error('Global Error:', err.message);
+  res.status(500).send('Internal Server Error');
+});
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-
 
 async function main(message) {
     const chatCompletion = await getGroqChatCompletion(message);
