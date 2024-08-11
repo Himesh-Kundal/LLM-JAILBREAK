@@ -4,7 +4,7 @@ import axios from 'axios';
 const TextBoxWithButton = () => {
   const [inputText, setInputText] = useState('');
   const [resultText, setResultText] = useState('');
-  const [backendURL, setBackendURL] = useState('');
+  const [backendURL, setBackendURL] = useState('http://localhost:3001/');
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
