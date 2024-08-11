@@ -4,14 +4,19 @@ import axios from 'axios';
 const TextBoxWithButton = () => {
   const [inputText, setInputText] = useState('');
   const [resultText, setResultText] = useState('');
+  const [backendURL, setBackendURL] = useState('');
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
+  const handleIPChange = (e) => {
+    setBackendURL(e.target.value);
+  };
+
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/', { message: inputText });
+      const response = await axios.post(backendURL, { message: inputText });
       console.log(response);
       setResultText(response.data);
     } catch (error) {
@@ -28,6 +33,13 @@ const TextBoxWithButton = () => {
         placeholder="Write your sentence here..."
         rows="4"
         cols="50"
+      />
+      <br />
+      <textarea 
+        value={backendURL} 
+        onChange={handleIPChange} 
+        placeholder="Write Backend URL here..."
+        rows="1"
       />
       <br />
       <button onClick={handleSubmit}>Submit</button>
