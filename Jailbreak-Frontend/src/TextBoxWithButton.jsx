@@ -26,7 +26,7 @@ const TextBoxWithButton = () => {
 
   return (
     <div>
-      <h1>Unleah Your Creativity</h1>
+      <h1>Unleash Your Creativity</h1>
       <textarea 
         value={inputText} 
         onChange={handleInputChange} 
