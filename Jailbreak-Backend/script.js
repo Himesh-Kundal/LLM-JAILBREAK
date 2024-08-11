@@ -17,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/', (req, res) => {
+  console.log(req.body);
     const message=(req.body.message);
     main(message).then((response) => {
         res.send(response);
@@ -31,6 +32,7 @@ app.listen(port, () => {
 
 async function main(message) {
     const chatCompletion = await getGroqChatCompletion(message);
+    console.log(chatCompletion.choices[0]?.message?.content || "");
     return (chatCompletion.choices[0]?.message?.content || "");
   }
 
