@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
 const TextBoxWithButton = () => {
   const [inputText, setInputText] = useState('');
@@ -24,6 +25,7 @@ const TextBoxWithButton = () => {
       setLoading("");
     } catch (error) {
       console.error('Error posting data:', error);
+      setLoading("");
     }
   };
 
@@ -48,13 +50,9 @@ const TextBoxWithButton = () => {
       <button onClick={handleSubmit}>Submit</button>
       <p>{loading}</p>
       <br />
-      <textarea 
-        value={resultText} 
-        readOnly 
-        placeholder="Result will be displayed here..."
-        rows="100"
-        cols="50"
-      />
+      <div style={{border: "1px solid #ccc", padding: "10px", minHeight: "200px", maxWidth: "100vw"}}>
+        <ReactMarkdown>{resultText}</ReactMarkdown>
+      </div>
     </div>
   );
 };
